@@ -44,7 +44,7 @@ exports.getProducts = catchAsync( async(req , res ,next) => {
 
 exports.createProduct = catchAsync(  async(req , res , next) => {
     const reqBody = req.body ;
-   
+        req.body.user = req.user.id ;
         const product = await Product.create(req.body) ;
         console.log('This is req body:' + req.body) ;
 

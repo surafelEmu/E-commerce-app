@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
         required: [true , 'Please provide a product price'] ,
         
         maxLenght: [5 ,'product name cannot exceed 100 characters']
-    } 
+    } ,
     // description: {
     //     type: String ,
     //     required: [true , 'Please provide a product description'] ,
@@ -78,7 +78,12 @@ const productSchema = new mongoose.Schema({
     //         type: Date ,
     //         default: Date.now()
     //     }
-    // }
+    // } ,
+    user: {
+        type: mongoose.Schema.ObjectId ,
+        ref: 'User' ,
+        required: true 
+    }
 
 }) ;
 
