@@ -16,6 +16,8 @@ app.use(bodyParser.json())
 
 app.use('/api/v1' , productRoute) ;
 app.use('/api/v1' , auth) ;
+
+
 app.use(handleErrors) ;
 
 
