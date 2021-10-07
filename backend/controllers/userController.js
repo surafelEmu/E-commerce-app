@@ -1,7 +1,7 @@
 const User = require('../models/userModel') ;
 const catchAsync = require('../middlewares/catchAsync') ;
 const ErrorHandler = require('../utils/errorHandler');
-
+const sendToken = require('../utils/jwtToken') ;
 
 
 exports.createUser = catchAsync(async (req , res , next) => {
@@ -19,12 +19,7 @@ exports.createUser = catchAsync(async (req , res , next) => {
 
     const token = user.getJwtToken() ;
 
-    res.status(201).json({
-        status: true ,
-        token ,
-        user
-
-    })
+    sendToken(user , 200 , res) ;
 }) ;
 
 
@@ -46,10 +41,7 @@ exports.loginUser = catchAsync( async (req , res , next) => {
      }
      const token = user.getJwtToken() ;
 
-     res.status(201).json({
-         success: true ,
-         token
-     })
+     sendToken(user , 200 , res) ;
 
 
 })
