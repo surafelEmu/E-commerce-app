@@ -2,6 +2,7 @@ const express = require('express') ;
 const bodyParser = require('body-parser') ;
 const {handleErrors} = require('./middlewares/error') ;
 const auth = require('./routes/authRoute.js') ;
+const order = require('./routes/orderRoute') ;
 const cookieParsor = require('cookie-parser') ;
 
 
@@ -18,7 +19,7 @@ app.use(cookieParsor())
 
 app.use('/api/v1' , productRoute) ;
 app.use('/api/v1' , auth) ;
-
+app.use('/api/v1' , order) ;
 
 app.use(handleErrors) ;
 
