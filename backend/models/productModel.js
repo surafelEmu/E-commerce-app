@@ -51,7 +51,9 @@ const productSchema = new mongoose.Schema({
                 'Home'
             ] ,
             message: 'Please select the correct catagory for your product'
-        } ,
+        } 
+    },
+
         seller: {
             type: String ,
             required: [true , 'please enter product seller']
@@ -66,25 +68,27 @@ const productSchema = new mongoose.Schema({
             {
                 name: {
                     type: String ,
-                    required: true 
+                    //required: true 
                 } ,
+                rating: Number ,
                 comment: {
                     type: String ,
                     requried: true 
-                } 
-            } 
-        ] ,
-        createdAt: {
-            type: Date ,
-            default: Date.now()
-        }
-    } ,
-    user: {
-        type: mongoose.Schema.ObjectId ,
-        ref: 'User' ,
-        required: true 
-    }
-
+                } ,
+                createdAt: {
+                    type: Date ,
+                    default: Date.now()
+                } ,
+        
+                user: {
+                    type: mongoose.Schema.ObjectId ,
+                    ref: 'User' ,
+                    required: true 
+                    }
+            } ,
+       
+        ] 
+     
 }) ;
 
 const products = mongoose.model('products' , productSchema) ;
