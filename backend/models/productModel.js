@@ -87,7 +87,11 @@ const productSchema = new mongoose.Schema({
                     }
             } ,
        
-        ] 
+        ]  ,
+        numofReviews: {
+            type: Number ,
+            
+        }
      
 }) ;
 

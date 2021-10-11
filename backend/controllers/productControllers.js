@@ -22,7 +22,7 @@ exports.getSingleProduct =  catchAsync(  async(req , res, next) => {
 
 exports.getProducts = catchAsync( async(req , res ,next) => {
 
-        const resPerPage = 2 ;
+        const resPerPage = 8 ;
 
         const apiFeatures = new APIFeatures(Product.find() , req.query).search()
         .filter() 
