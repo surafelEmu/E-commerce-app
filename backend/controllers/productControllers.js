@@ -35,7 +35,8 @@ exports.getProducts = catchAsync( async(req , res ,next) => {
 
         res.status(200)
         .json({
-            message: 'Successfuly got products' ,
+            success: true ,
+            productCount: products.length ,
             products
         })
        
