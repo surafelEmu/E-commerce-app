@@ -1,6 +1,8 @@
 import ProductConstants from '../constants/productConstants' ;
 
 const  productsReducer = ( state = { products: [] } , action) => {
+    console.log('payload on reducer') ;
+    console.log(action.payload) ;
     switch(action.type) {
         case ProductConstants.ALL_PRODUCTS_REQUEST: 
             return {
@@ -16,8 +18,9 @@ const  productsReducer = ( state = { products: [] } , action) => {
         case ProductConstants.ALL_PRODUCTS_FAIL: 
             return {
                 loading: false,
-                error: action.payload 
-            } 
+                products: [] ,
+                error: action.payload
+              } 
         case ProductConstants.CLEAR_ERRORS: 
             return {
                 ...state ,
