@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/server.js",
+    "start": "nodemon backend/server.js --ignore client",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server.js",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server.js"
   },

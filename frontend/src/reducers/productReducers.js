@@ -1,8 +1,7 @@
-import ProductConstants from '../constants/productConstants' ;
+import ProductConstants, { PRODUCTS_DETAIL_FAIL, PRODUCTS_DETAIL_SUCCESS } from '../constants/productConstants' ;
 
-const  productsReducer = ( state = { products: [] } , action) => {
-    console.log('payload on reducer') ;
-    console.log(action.payload) ;
+export const  productsReducer = ( state = { products: [] } , action) => {
+    
     switch(action.type) {
         case ProductConstants.ALL_PRODUCTS_REQUEST: 
             return {
@@ -32,4 +31,31 @@ const  productsReducer = ( state = { products: [] } , action) => {
     }
 }
 
-export default productsReducer ;
+export const productDetailsReducer = (state = { product:  [] } , action) => {
+    switch(action.type) {
+        case ProductConstants.PRODUCTS_DETAIL_REQUEST: 
+            return {
+                ...state ,
+                loading: true
+            }
+        case ProductConstants.PRODUCTS_DETAIL_SUCCESS: 
+            return {
+                loading: false ,
+                product: action.payload.product
+            }
+        case ProductConstants.PRODUCTS_DETAIL_FAIL: 
+            return {
+                ...state ,
+                loading: false ,
+                product: [] ,
+                error: action.payload
+            }
+        case ProductConstants.CLEAR_ERRORS: 
+            return {
+                ...state ,
+                error: null
+            }
+        default: return   state 
+    }
+}
+

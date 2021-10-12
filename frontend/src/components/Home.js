@@ -17,14 +17,14 @@ import { useAlert } from 'react-alert' ;
 
 
     useEffect(() => {
-     console.log('This is Error: ')
-     console.log(error) ;
+    
 
       if(error) {
         return alert.error(error) ;
       }
 
       dispatch(getProducts()) ;
+
     } , [dispatch , alert , error])
 
     return (

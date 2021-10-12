@@ -4,9 +4,9 @@ const catchAsync = require('../middlewares/catchAsync')
 const APIFeatures = require('../utils/apiFeatures') ;
 const { handleErrors } = require('../middlewares/error.js');
 exports.getSingleProduct =  catchAsync(  async(req , res, next) => {
-   
-        const product = await Product.findById(req.params.id) ;
+           //return next(new ErrorHandler('new Error ' , 400)) ;
 
+        const product = await Product.findById(req.params.id) ;
         if(!product) return next(new ErrorHandler('Product not found' , 404)) ;
 
 
