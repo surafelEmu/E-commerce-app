@@ -7,6 +7,7 @@ import { Carousel } from 'react-bootstrap' ;
 
 import { useDispatch , useSelector } from 'react-redux';
 import { getProductDetail , cleanErrors } from '../actions/productActions';
+import { MetaData } from './layout/MetaData';
 
 const Details = ({match}) => {
     const dispatch = useDispatch() ;
@@ -41,6 +42,7 @@ const Details = ({match}) => {
         {loading ? <Loader/> : (
             
             <Fragment>
+            <MetaData title={product.name} /> 
             <div className="row f-flex justify-content-around">
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
                 <Carousel pause='hover'>
@@ -59,9 +61,9 @@ const Details = ({match}) => {
                 <hr />
     
                 <div className="rating-outer">
-                    <div className="rating-inner"></div>
+                    <div className="rating-inner" style={{width: `${(product.ratings / 5) * 100}%`}}></div>
                 </div>
-                <span id="no_of_reviews">{product.numOfReviews}</span>
+                <span id="no_of_reviews">{product.numOfReviews} reviews</span>
     
                 <hr />
     
