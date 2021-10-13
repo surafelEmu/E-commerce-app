@@ -8,7 +8,7 @@ import Loader from './layout/loader'
 import Product from './product/product' ;
 import { useAlert } from 'react-alert' ;
 
- const Home = () => {
+ const Home = ({match}) => {
 
     const [currentPage , setCurrentPage] = useState(1) ;
 
@@ -20,6 +20,9 @@ import { useAlert } from 'react-alert' ;
     const prodPerPage = 8 ;
     const prodCount =100000000 ;
     console.log(products)
+
+    const keyword = match.params.keyword ;
+
     useEffect(() => {
     
 
@@ -27,9 +30,9 @@ import { useAlert } from 'react-alert' ;
         return alert.error(error) ;
       }
 
-      dispatch(getProducts(currentPage)) ;
+      dispatch(getProducts(keyword ,currentPage)) ;
 
-    } , [dispatch , alert , error , currentPage])
+    } , [dispatch , alert , error , keyword , currentPage])
 
 
     function setCurrentPageNo(pageNumber) {
