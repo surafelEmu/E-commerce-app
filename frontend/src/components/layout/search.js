@@ -10,7 +10,7 @@ import React , {Fragment ,useState , useEffect} from 'react'
 
  const Search = ({history}) => {
 
-    const [keyword ,setKeyword] = useState(1) ;
+    const [keyword ,setKeyword] = useState() ;
 
         const searchHandler = (e) => {
         e.preventDefault()

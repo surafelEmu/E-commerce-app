@@ -2,11 +2,21 @@ import axios from 'axios' ;
 
 import ProductConstants from '../constants/productConstants' ; 
 
-export const getProducts = (keyword = '' , currentPage = 2) => async (dispatch) => {
+export const getProducts = (keyword = '' , currentPage = 1 , price , catagory , rating = 0) => async (dispatch) => {
     try{
         dispatch({ type: ProductConstants.ALL_PRODUCTS_REQUEST})
 
-        const { data } = await axios.get(`/api/v1/products?keyword=${keyword}&page=${currentPage}`) ;
+        
+        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}` 
+            
+            //&price[lte]=${price[1]}&price[gte]=${price[0]}&raings[gte]=${rating}` ;
+
+            if(catagory) {
+                link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&catagory=${catagory}&raings[gte]=${rating}` 
+            }
+
+        const { data } = await axios.get(link) ;
+        console.log(data) ;
 
         dispatch({
             type: ProductConstants.ALL_PRODUCTS_SUCCESS ,

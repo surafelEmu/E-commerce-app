@@ -28,21 +28,35 @@ class APIFeatures {
 
     filter() {
 
-        //filtering
-        const queryCopy = { ...this.queryStr} ;
+        // const queryCopy = { ...this.queryStr };
+
+        // // Removing fields from the query
+        // const removeFields = ['keyword', 'limit', 'page']
+        // removeFields.forEach(el => delete queryCopy[el]);
+
+        // // Advance filter for price, ratings etc
+        // let queryStr = JSON.stringify(queryCopy)
+        // queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`)
+
+
+        // this.query = this.query.find(JSON.parse(queryStr));
+        // return this;
+
+        const queryObj = { ...this.queryStr };
+       const excludedFields = ['keyword' ,'page', 'sort', 'limit', 'fields'];
+       excludedFields.forEach(el => delete queryObj[el]);
     
-        const removeFields = ['keyword' , 'limit' , 'page'] ;
-        removeFields.forEach(el => delete queryCopy[el]) ;
-
-
-        //advanced filtering
-        let queryStr1 = JSON.stringify(queryCopy) ;
-        let queryStr = queryStr1.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`)
+        // 1B) Advanced filtering
+        let queryStr = JSON.stringify(queryObj);
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
         console.log(queryStr) ;
-        this.query = this.query.find(JSON.parse(queryStr)) ;
-
-        return this ;
+        this.query = this.query.find(JSON.parse(queryStr));
+    
+        return this;
     }
+
+    
+    
     
 
 }
