@@ -1,7 +1,7 @@
 const userConstants = require('../constants/userConstants') ;
 const axios = require('axios') ;
 
-export const Login = (email, password) => async (dispatch) =>  {
+export const login = (email, password) => async (dispatch) =>  {
     dispatch({type: userConstants.LOGIN_REQUEST}) ;
 
     try{
@@ -11,7 +11,7 @@ export const Login = (email, password) => async (dispatch) =>  {
             }
         }
     
-        const data = axios.post('/api/v1/signin' , {email , password} , config) ;
+        const data = await axios.post('/api/v1/signin' , {email , password} , config) ;
     
         console.log(data) ;
         dispatch({type: userConstants.LOGIN_SUCCESS , payload: data })
@@ -20,4 +20,32 @@ export const Login = (email, password) => async (dispatch) =>  {
     }
    
 
+} 
+
+export const register = (userData) => async (dispatch) => {
+
+    try{
+        dispatch({type: userConstants.ALL_USERS_REQUEST}) ;
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const data = await axios.post('/api/v1/register' , userData , config )
+
+        dispatch({type: userConstants.REGISTER_USER_SUCCESS , payload: data}) ;
+
+    }catch(error) {
+        dispatch(error) ;
+    }
+}
+
+
+
+export const cleanErrors = () => async (dispatch) => {
+    dispatch({
+        type: userConstants.CLEAR_ERRORS
+    })
 }

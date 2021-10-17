@@ -3,6 +3,9 @@ import Footer from './components/layout/footer'
 import Home from './components/Home'
 //import Product_detail from './components/product_detail';
 import Detail from './components/Detail' ;
+import Login from './components/user/login' ;
+import Register from './components/user/register';
+
 
 import { BrowserRouter as Router , Route} from 'react-router-dom' ;
 
@@ -13,6 +16,10 @@ function App() {
     <div className="App">
      <Header />
      <div className="container container-fluid">
+
+          <Route path = "/login" component={Login}/>
+          <Route path = "/register" component={Register}/>
+
           <Route path = "/" component={Home} exact />
           <Route path = "/search/:keyword" component={Home}  />
 

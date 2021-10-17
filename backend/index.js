@@ -6,6 +6,10 @@ const order = require('./routes/orderRoute') ;
 const cookieParsor = require('cookie-parser') ;
 
 
+const fileUpload = require('express-fileupload')
+const cloudinary = require('cloudinary') ;
+
+
 const app = express() ;
 
 const productRoute = require('./routes/productRoutes') ;
@@ -16,6 +20,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 app.use(cookieParsor())
+app.use(bodyParser.urlencoded({extended: true})) ;
+app.use(fileUpload()) ;
+
+//Setting up cloudinary config
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME ,
+    api_key: process.env.API_KEY ,
+    api_secret: process.env.API_SECREAT
+})
 
 app.use('/api/v1' , productRoute) ;
 app.use('/api/v1' , auth) ;

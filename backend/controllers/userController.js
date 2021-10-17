@@ -4,7 +4,16 @@ const ErrorHandler = require('../utils/errorHandler');
 const sendToken = require('../utils/jwtToken') ;
 const Email = require('../utils/sendEmail.js') ;
 
+const coudinary = require('cloudinary') ;
+
 exports.createUser = catchAsync(async (req , res , next) => {
+
+  const  result = await cloudinary.v2.upload(req.body.avatar , {
+    folder: 'avatars' ,
+    width: 150 ,
+    crop: 'scale'
+  }) ;
+
 
     const {name , email , password} = req.body ;
     const user = await User.create({
@@ -12,8 +21,8 @@ exports.createUser = catchAsync(async (req , res , next) => {
         email ,
         password ,
         avator: {
-            public_id: 'Benedict_Cumberbatch_2011' ,
-            url: 'https://res.cloudinary.com/demo/image/upload/remote_media/commons/7/75/Benedict_Cumberbatch_2011.jpg'
+            public_id: result.public_id ,
+            url: result.secure_url
         }
     }) ;
 
