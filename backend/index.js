@@ -7,7 +7,6 @@ const cookieParsor = require('cookie-parser') ;
 
 
 const fileUpload = require('express-fileupload')
-const cloudinary = require('cloudinary') ;
 
 
 const app = express() ;
@@ -24,11 +23,11 @@ app.use(bodyParser.urlencoded({extended: true})) ;
 app.use(fileUpload()) ;
 
 //Setting up cloudinary config
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME ,
-    api_key: process.env.API_KEY ,
-    api_secret: process.env.API_SECREAT
-})
+// cloudinary.config({
+//     cloud_name: process.env.CLOUD_NAME ,
+//     api_key: process.env.API_KEY ,
+//     api_secret: process.env.API_SECREAT
+// })
 
 app.use('/api/v1' , productRoute) ;
 app.use('/api/v1' , auth) ;

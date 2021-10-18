@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { register, cleanErrors } from '../../actions/userAction'
 
 const Register = () => {
+
+    const alert = useAlert()  ;
     
-    const [user , setUser] = setState({
+    const [user , setUser] = useState({
         name: '' ,
         email: '' ,
         password: ''
@@ -30,6 +32,7 @@ const Register = () => {
         }
 
         if(error) {
+            console.log(error) ;
             alert.error(error.message) ;
             cleanErrors()
         }
@@ -39,7 +42,7 @@ const Register = () => {
 
     const submitHandler = (e) => {
         e.preventDefault() ;
-
+        //console.log('firing and wiring........')
         const formData = new FormData() ;
         formData.set('name' , name) ;
         formData.set('email', email) ;
@@ -54,12 +57,13 @@ const Register = () => {
     const onChange = (e) => {
         e.preventDefault() ;
 
-        if(e.target.name == 'name') {
+        if(e.target.name == 'avatar') {
 
-            const render = new FileReader() ;
+            const reader = new FileReader() ;
 
-            render.onload = () => {
+            reader.onload = () => {
                 if(reader.readyState === 2) {
+                    console.log('image is being set')
                     setAvatarPreview(reader.result)
                     setAvatar(reader.result)
                 }
@@ -92,7 +96,7 @@ const Register = () => {
                                 className="form-control"
                                 name='name'
                                 value={name}
-                                onChange={e => {setName(e.target.value)}}
+                                onChange={onChange}
                             />
                         </div>
 
@@ -104,7 +108,7 @@ const Register = () => {
                                 className="form-control"
                                 name='email'
                                 value={email}
-                                onChange={e => {setEmail(e.target.value)}}
+                                onChange={onChange }
                             />
                         </div>
 
@@ -116,7 +120,7 @@ const Register = () => {
                                 className="form-control"
                                 name='password'
                                 value={password}
-                                onChange={e => {setPassword(e.target.value)}}
+                                onChange={onChange}
                             />
                         </div>
 

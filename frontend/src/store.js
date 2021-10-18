@@ -5,7 +5,6 @@ import { authReducer , registerReducer } from './reducers/userReducer' ;
 import {productsReducer , productDetailsReducer} from './reducers/productReducers' ;
 
 const reducer = combineReducers({
-    register: registerReducer ,
     auth: authReducer ,
     products: productsReducer ,
     productDetails: productDetailsReducer

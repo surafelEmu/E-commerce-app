@@ -6,11 +6,19 @@ import Detail from './components/Detail' ;
 import Login from './components/user/login' ;
 import Register from './components/user/register';
 
+import {useEffect} from 'react' ;
+
+import store from './store' ;
+import { loaduser } from './actions/userAction' ;
 
 import { BrowserRouter as Router , Route} from 'react-router-dom' ;
 
 import './App.css'
 function App() { 
+
+  useEffect(() => {
+    store.dispatch(loaduser()) ;
+  }, [])
   return (
     <Router>
     <div className="App">

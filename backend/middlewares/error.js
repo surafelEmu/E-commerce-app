@@ -2,15 +2,24 @@ const ErrorHandler = require('../utils/errorHandler.js') ;
 
 
 exports.handleErrors = (err , req ,res , next) => {
-    err.statusCode = err.statusCode || 500 ;
-    err.message = err.message || "Internal Server Error" ;
 
+    let message , statusCode ;
+    if(err) {
+        if(!err.statusCode) statusCode = 500 ;
+        if(!err.message) message = err ;
+    }
+
+    statusCode = err.statusCode || 500 ;
+    message = err.message || "Internal Server Error" ;
+
+    console.log('reading from error')
+    console.log( err) ;
 
     if(process.env.NODE_ENV == 'DEVELOPEMENT') {
-        res.status(err.statusCode).json({
+        res.status(statusCode).json({
             success: false ,
             error: err ,
-            errMessage: err.message ,
+            errMessage: message ,
             stack: err.stack
         })
     }
@@ -30,10 +39,10 @@ exports.handleErrors = (err , req ,res , next) => {
         }
 
         // wrong mongoose object Id error
-        res.status(error.statusCode).json({
+        res.status(statusCode).json({
             success: false ,
-            message: error.message || 'Internal Server Error'
+            message: message || 'Internal Server Error'
         })
     }
-    
+
 }

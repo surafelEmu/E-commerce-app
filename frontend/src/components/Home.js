@@ -46,7 +46,6 @@ const Range = createSliderWithTooltip(Slider.Range)
     const dispatch = useDispatch() ;
 
     const {loading , products , error , resPerPage , productCount  } = useSelector(state => state.products) ;
-    const {isAuthenticated} = useSelector(state => state.auth) ;
 
     const prodPerPage = 8 ;
     const prodCount =100000000 ;
@@ -55,19 +54,7 @@ const Range = createSliderWithTooltip(Slider.Range)
     const keyword = match.params.keyword ;
 
     useEffect(() => {
-      // dispatch(Login(
-      //   "shemanew009@gmail.com" ,
-      //   "sheme@Shemanew"
-      // ))
-
-
-      // if(isAuthenticated) {
-
-        
-      //   console.log('it is authenticated successfully') ;
-      // }
-    
-
+     
       if(error) {
         return alert.error(error) ;
       }

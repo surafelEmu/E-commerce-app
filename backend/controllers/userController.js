@@ -8,25 +8,28 @@ const coudinary = require('cloudinary') ;
 
 exports.createUser = catchAsync(async (req , res , next) => {
 
-  const  result = await cloudinary.v2.upload(req.body.avatar , {
-    folder: 'avatars' ,
-    width: 150 ,
-    crop: 'scale'
-  }) ;
+  // const  result = await coudinary.v2.uploader.upload(req.body.avatar , {
+  //   folder: 'avatars' ,
+  //   width: 150 ,
+  //   crop: 'scale'
+  // }) ;
 
 
     const {name , email , password} = req.body ;
+
     const user = await User.create({
         name ,
         email ,
         password ,
-        avator: {
-            public_id: result.public_id ,
-            url: result.secure_url
+        avatar: {
+            // public_id: result.public_id ,
+            // url: result.secure_url
+            public_id: 'products/61oXGZ60GfL_fixco9' ,
+            url: 'https://res.cloudinary.com/bookit/image/upload/v1614877995/products/61oXGZ60GfL_fixco9.jpg'
         }
     }) ;
 
-    const token = user.getJwtToken() ;
+    //const token = user.getJwtToken() ;
 
     sendToken(user , 200 , res) ;
 }) ;
@@ -35,12 +38,13 @@ exports.createUser = catchAsync(async (req , res , next) => {
 exports.loginUser = catchAsync( async (req , res , next) => {
     const {email , password} = req.body ;
 
+    console.log(req.body) ; 
      const user = await User.findOne({email}).select('+password') ;
 
      if(!user) {
          return next(new ErrorHandler('Invalid Email or password' , 401)) ;
      }
-     console.log(email) ;
+    
 
      const isPasswordMatched = await user.comparePassword(password) ;
 

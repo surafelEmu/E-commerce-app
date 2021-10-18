@@ -8,7 +8,7 @@ import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { login} from '../../actions/userAction' ;
 
-const Login = () => {
+const Login = ({ history, location }) => {
 
     const [password , setPassword] = useState() ;
     const [email , setEmail] = useState() ;
@@ -20,12 +20,13 @@ const Login = () => {
 
     useEffect(() => {
         if(isAuthenticated){
-            console.log('auth is successfull') ;
+            history.push('/') ;
         } 
 
         if(error) {
-            alert.error(error.message) ;
-           // dispatch(clearErrors()) ;
+            console.log('error.........' + error)
+            alert.error(error) ;
+          // dispatch(clearErrors()) ;
         } 
 
        
