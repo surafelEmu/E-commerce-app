@@ -11,7 +11,7 @@ import Loader from './layout/loader'
 import Product from './product/product' ;
 import { useAlert } from 'react-alert' ;
 
-import { login } from '../actions/userAction' ;
+import { login } from '../actions/authAction' ;
 
 const { createSliderWithTooltip } = Slider ;
 

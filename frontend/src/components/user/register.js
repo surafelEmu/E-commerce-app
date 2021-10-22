@@ -4,7 +4,7 @@ import {MetaData} from '../layout/MetaData'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { register, cleanErrors } from '../../actions/userAction'
+import { register, cleanErrors } from '../../actions/authAction'
 
 const Register = () => {
 

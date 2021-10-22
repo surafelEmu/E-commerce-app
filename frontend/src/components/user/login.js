@@ -6,7 +6,7 @@ import {MetaData} from '../layout/MetaData'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { login} from '../../actions/userAction' ;
+import { login} from '../../actions/authAction' ;
 
 const Login = ({ history, location }) => {
 

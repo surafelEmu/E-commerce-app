@@ -5,7 +5,7 @@ import {Route ,Link} from 'react-router-dom' ;
 
 import { useDispatch, useSelector } from 'react-redux' ;
 
-import { logout } from '../../actions/userAction' ;
+import { logout } from '../../actions/authAction' ;
 
 const Header = () => {
 

@@ -106,24 +106,42 @@ exports.updatePassword = catchAsync( async (req ,res , next) => {
 
 
 
-exports.updateProfile = catchAsync( async (req ,res , next) => {
-  const user = await User.findByIdAndUpdate(req.user.id , req.body , {
-    new: true ,
-    runValidators: true ,
-    useFindAndModify: false
-  }) ;
+exports.updateProfile = catchAsync(async (req, res, next) => {
+  const newUserData = {
+      name: req.body.name,
+      email: req.body.email
+  }
 
-  // user.name = req.body.name ;
-  //await  user.save() ;
+  console.log(req.body.avatar) ;
+  // Update avatar
+  if (req.body.avatar !== '') {
+      const user = await User.findById(req.user.id)
 
-  res.status(201).json({
-    success: true ,
-    user
+      const image_id = user.avatar.public_id;
+      const res = await cloudinary.v2.uploader.destroy(image_id);
+
+      const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+          folder: 'avatars',
+          width: 150,
+          crop: "scale"
+      })
+
+      newUserData.avatar = {
+          public_id: result.public_id,
+          url: result.secure_url
+      }
+  }
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false
   })
-  
-}) ;
 
-
+  res.status(200).json({
+      success: true
+  })
+})
 //Admin Routes 
 
 //get All users => /api/v1/admin/users

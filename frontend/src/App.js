@@ -9,21 +9,27 @@ import Register from './components/user/register';
 import {useEffect} from 'react' ;
 
 import store from './store' ;
-import { loaduser } from './actions/userAction' ;
-
+import { loaduser } from './actions/authAction' ;
+import ProtectedRout from './components/route/protectedRout';
 import { BrowserRouter as Router , Route} from 'react-router-dom' ;
-
+import Profile from './components/user/profile' ;
+import UpdateProfile from './components/user/UpdateProfile';
 import './App.css'
 function App() { 
 
   useEffect(() => {
     store.dispatch(loaduser()) ;
-  }, [])
+  }, []) ;
+
   return (
     <Router>
     <div className="App">
      <Header />
      <div className="container container-fluid">
+          
+          
+          <ProtectedRout path = "/me" component={Profile} exact/>
+          <ProtectedRout path = "/me/update" component={UpdateProfile} exact/>
 
           <Route path = "/login" component={Login}/>
           <Route path = "/register" component={Register}/>

@@ -47,3 +47,45 @@ export const authReducer = (state = {user: {}} , action) => {
         }
     }
 }
+
+export const userReducer = (state = {user: {}} , action) => {
+    switch(action.type) {
+        case userConstants.UPDATE_USER_REQUEST : 
+        case userConstants.UPDATE_PASSWORD_REQUEST:
+            return {
+                ...state ,
+                loading: true ,
+                isUpdated: false ,
+
+            }
+        case userConstants.UPDATE_USER_SUCCESS : 
+        case userConstants.UPDATE_PASSWORD_SUCCESS: 
+            return {
+                ...state ,
+                loading: false ,
+                isUpdated: true ,
+                updatedUser: action.payload 
+
+            }
+        case userConstants.UPDATE_USER_FAIL : 
+        case userConstants.UPDATE_PASSWORD_FAIL: 
+            return {
+                ...state ,
+                loading: false ,
+                isUpdated: false ,
+                err: action.payload
+            }
+        case userConstants.UPDATE_USER_RESET : 
+        case userConstants.UPDATE_PASSWORD_RESET: 
+            return {
+                ...state ,
+                loading: false ,
+                isUpdated: false ,
+                updatedUser: null 
+            }
+        default: 
+            return  state ;
+            
+
+    }
+}
