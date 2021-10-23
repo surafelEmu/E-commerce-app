@@ -3,6 +3,8 @@ const bodyParser = require('body-parser') ;
 const {handleErrors} = require('./middlewares/error') ;
 const auth = require('./routes/authRoute.js') ;
 const order = require('./routes/orderRoute') ;
+const payment = require('./routes/paymentRoute')
+
 const cookieParsor = require('cookie-parser') ;
 
 
@@ -32,6 +34,7 @@ app.use(fileUpload()) ;
 app.use('/api/v1' , productRoute) ;
 app.use('/api/v1' , auth) ;
 app.use('/api/v1' , order) ;
+app.use('/api/v1' , payment) ;
 
 app.use(handleErrors) ;
 

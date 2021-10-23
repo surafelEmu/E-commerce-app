@@ -1,4 +1,4 @@
-import React , {Link ,Fragment, useEffect , useState} from 'react' ;
+import React , {Fragment, useEffect , useState} from 'react' ;
 import { useAlert } from 'react-alert';
 
 import Loader from '../layout/loader';

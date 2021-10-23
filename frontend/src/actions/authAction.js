@@ -63,7 +63,7 @@ export const loaduser = () => async (dispatch) => {
 
     }catch(error) {
         console.log(error)
-        dispatch({type: userConstants.LOAD_USER_FAIL , payload: error.response.data.errMessage}) ;
+        dispatch({type: userConstants.LOAD_USER_FAIL , payload: error}) ;
     }
 }
 

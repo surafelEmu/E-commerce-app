@@ -17,10 +17,11 @@ const Login = ({ history, location }) => {
     const alert = useAlert() ;
     const {isAuthenticated , error , loading } = useSelector(state => state.auth) ;
 
+    const redirect = location.search ? location.search.split('=')[1] : '/' ;
 
     useEffect(() => {
         if(isAuthenticated){
-            history.push('/') ;
+            history.push(redirect) ;
         } 
 
         if(error) {
@@ -37,6 +38,8 @@ const Login = ({ history, location }) => {
         e.preventDefault() ;
         dispatch(login(email , password)) ;
     }
+
+    
     return (
         <Fragment>
             {loading ? <Loader /> : (
