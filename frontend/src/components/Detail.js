@@ -8,19 +8,26 @@ import { Carousel } from 'react-bootstrap' ;
 import { useDispatch , useSelector } from 'react-redux';
 import { getProductDetail , cleanErrors } from '../actions/productActions';
 import { MetaData } from './layout/MetaData';
-
+import { addItemToCart } from '../actions/cartAction' ;
 const Details = ({match}) => {
+
+
     const dispatch = useDispatch() ;
 
     const alert = useAlert() ;
 
     const [quantity , setQuantity] = useState(1) ;
-
+    const {cartItems} = useSelector(state => state.cart) ;
     const { loading , error , product } = useSelector(state => state.productDetails)
     // console.log(product.images) ;
     // const image = product.images ;
     // console.log(image) ;
     useEffect(() => {
+
+        if(cartItems) {
+            console.log('added successsully') ;
+            console.log(cartItems) ;
+        }
         
         if(error) {
             console.log('this is error') ;
@@ -32,6 +39,12 @@ const Details = ({match}) => {
         dispatch(getProductDetail(match.params.id))
 
     } , [dispatch , match.params.id]) ;
+
+
+    const addToCart = () => {
+        dispatch(addItemToCart(match.params.id , quantity)) ;
+        alert.success('Item Added to Cart') ;
+    } 
 
     const decreaseQty = () => {
         const count = document.querySelector('.count') ;
@@ -95,7 +108,7 @@ const Details = ({match}) => {
 
                     <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                  </div>
-                 <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
+                 <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" onClick={addToCart}>Add to Cart</button>
     
                 <hr />
     

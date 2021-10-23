@@ -14,6 +14,10 @@ import ProtectedRout from './components/route/protectedRout';
 import { BrowserRouter as Router , Route} from 'react-router-dom' ;
 import Profile from './components/user/profile' ;
 import UpdateProfile from './components/user/UpdateProfile';
+
+
+import Cart from './components/cart/cart' ;
+
 import './App.css'
 function App() { 
 
@@ -30,7 +34,7 @@ function App() {
           
           <ProtectedRout path = "/me" component={Profile} exact/>
           <ProtectedRout path = "/me/update" component={UpdateProfile} exact/>
-
+          <Route path = "/cart" component={Cart} />
           <Route path = "/login" component={Login}/>
           <Route path = "/register" component={Register}/>
 
