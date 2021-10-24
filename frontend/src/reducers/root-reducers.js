@@ -4,9 +4,10 @@ import {persistReducer} from 'redux-persist' ;
 import storage from 'redux-persist/lib/storage' ;
 
 
-import {authReducer , userReducer} from '../reducers/userReducer' ;
+import {authReducer , userReducer} from './userReducer' ;
 import { cartReducer } from "./cartReducer";
 import { productDetailsReducer , productsReducer } from "./productReducers";
+import { newOrderReducer} from './orderReducer'
 
 const persistConfig = {
     key: 'root' ,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     user: userReducer ,
     products: productsReducer ,
     cart: cartReducer ,
-    productDetails: productDetailsReducer
+    productDetails: productDetailsReducer ,
+    order: newOrderReducer
 }) ;
 
 export default persistReducer(persistConfig ,rootReducer) ;

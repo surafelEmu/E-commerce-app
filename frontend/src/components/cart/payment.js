@@ -11,6 +11,8 @@ import { MetaData } from '../layout/MetaData';
 import { addItemToCart , removeItemFromCart ,  } from '../../actions/cartAction' ;
 import CheckoutSteps from './CheckoutStep';
 
+import {newOrder} from '../../actions/orderAction'
+
 import { useStripe , useElements , CardNumberElement , CardExpiryElement , CardCvcElement } from '@stripe/react-stripe-js'  ;
 
 import axios from 'axios'
@@ -35,16 +37,41 @@ const Payment = ({ history }) => {
 
 
     const { user } = useSelector(state => state.auth) ;
+    //const { order } = useSelector(state => state.order) ;
+
     const {cartItems , shippingInfo } = useSelector(state => state.cart) ;
     
     useEffect(() => {
 
     } , []) ;
 
-    const paymentData = {
-       amount: Math.round( 50 * 100 ) 
+    const data = localStorage.getItem('shippingInfo') 
+
+    console.log(data) ;
+    const order = {
+        orderItems: cartItems ,
+        shippingInfo
+    }
+
+    console.log(order) ;
+    
+    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
+    //console.log(orderInfo)
+
+
+    if(orderInfo) {
+        order.itemsPrice = orderInfo.itemPrice ;
+        order.shippingPrice = orderInfo.shippingPrice ;
+        order.taxPrice = order.taxPrice ;
+        order.totalPrice = order.totalPrice ;
 
     }
+
+    const paymentData = {
+       amount: Math.round( 500 * 100 ) 
+
+    }
+    console.log(paymentData)
 
     const submitHandler = async (e) => {
         e.preventDefault() ;
@@ -86,8 +113,12 @@ const Payment = ({ history }) => {
                 document.querySelector('#pay_btn').disabled = false ;
             } else {
                 if(result.paymentIntent.status === 'succeeded') {
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id ,
+                        status: result.paymentIntent.status
+                    }
 
-                    console.log('it is all done, know move on to orders') ;
+                    dispatch(newOrder(order)) ;
                 } else {
                     alert.error('There is some error occured wile processing payment') ;
                 }
@@ -147,7 +178,7 @@ const Payment = ({ history }) => {
                             type="submit"
                             className="btn btn-block py-3"
                         >
-                            Pay {` - $${paymentData.amount / 100}`}
+                            Pay {` - $${orderInfo.totalPrice}`}
                         </button>
 
                     </form>
