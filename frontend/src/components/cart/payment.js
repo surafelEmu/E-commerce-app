@@ -39,7 +39,65 @@ const Payment = ({ history }) => {
     
     useEffect(() => {
 
-    } , [])
+    } , []) ;
+
+    const paymentData = {
+       amount: Math.round( 50 * 100 ) 
+
+    }
+
+    const submitHandler = async (e) => {
+        e.preventDefault() ;
+
+        document.querySelector('#pay_btn').disabled = true ;
+
+
+        let res ;
+        try{
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            res = await axios.post('/api/v1/payment/process' , paymentData , config) ;
+
+            const clientSecret = res.data.client_Secret;
+
+            console.log(clientSecret) ;
+
+            if(!stripe || !elements) {
+
+                return ;
+            }
+
+            const result = await stripe.confirmCardPayment(clientSecret , {
+                payment_method: {
+                    card: elements.getElement(CardNumberElement) ,
+                    billing_details: {
+                        name: user.name ,
+                        email: user.email
+                    }
+                }
+            }) ;
+
+            if(result.error) {
+                alert.error(result.error) ;
+                document.querySelector('#pay_btn').disabled = false ;
+            } else {
+                if(result.paymentIntent.status === 'succeeded') {
+
+                    console.log('it is all done, know move on to orders') ;
+                } else {
+                    alert.error('There is some error occured wile processing payment') ;
+                }
+            }
+        } catch(error) {
+            document.querySelector('#pay_btn').disabled = false ;
+            alert.error(error)
+            console.log(error) ;
+        }
+    }
 
     return (
         <Fragment>
@@ -50,7 +108,7 @@ const Payment = ({ history }) => {
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">
                     <form className="shadow-lg"
-                    //onSubmit={submitHandler}
+                    onSubmit={submitHandler}
                     >
                         <h1 className="mb-4">Card Info</h1>
                         <div className="form-group">
@@ -89,7 +147,7 @@ const Payment = ({ history }) => {
                             type="submit"
                             className="btn btn-block py-3"
                         >
-                            {/* Pay {` - ${orderInfo && orderInfo.totalPrice}`} */}
+                            Pay {` - $${paymentData.amount / 100}`}
                         </button>
 
                     </form>

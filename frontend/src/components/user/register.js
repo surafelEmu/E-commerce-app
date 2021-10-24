@@ -24,7 +24,7 @@ const Register = () => {
 
     const disptach = useDispatch() ;
 
-    const {isAuthenticated , error , loading} = useSelector(state => state.register) ;
+    const {isAuthenticated , error , loading} = useSelector(state => state.auth) ;
 
     useEffect( () => {
         if(isAuthenticated) {

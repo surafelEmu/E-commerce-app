@@ -54,7 +54,7 @@ function App() {
 
   }, []) ;
 
-  // console.log('This is stripeKey')
+  console.log('This is stripeKey')
   console.log(process.env.REACT_APP_STRIPE_API_KEY) ;
 
   return (
@@ -79,7 +79,7 @@ function App() {
 
           {stripeApiKey && 
             <Elements stripe={loadStripe(stripeApiKey)}>
-              <protectedRout path="/payment" component={Payment} />
+              <ProtectedRout path="/payment" component={Payment} />
             </Elements>
           }
      </div>
