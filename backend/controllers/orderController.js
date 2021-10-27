@@ -51,8 +51,11 @@ exports.getSingleOrder = catchAsync( async (req ,res , next) => {
 //get logged in user orders => /api/v1/orders/me
 
 exports.getLoggedInUserOrders = catchAsync(async (req  ,res , next) => {
+    console.log(req.user) ;
     const orders = await Order.find({user: req.user.id}) ;
 
+    console.log("This are orders") 
+    console.log(orders) ;
     res.status(200).json({
         success: true ,
         orders

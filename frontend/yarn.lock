@@ -2752,7 +2752,7 @@
 
 "@types/hoist-non-react-statics@^3.3.0":
   "integrity" "sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA=="
-  "resolved" "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"
+  "resolved" "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"
   "version" "3.3.1"
   dependencies:
     "@types/react" "*"
@@ -2849,9 +2849,9 @@
   "version" "1.5.4"
 
 "@types/react-redux@^7.1.16":
-  "integrity" "sha512-L37dSCT0aoJnCgpR8Iuginlbxoh7qhWOXiaDqEsxVMrER1CmVhFD+63NxgJeT4pkmEM28oX0NH4S4f+sXHTZjA=="
-  "resolved" "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.19.tgz"
-  "version" "7.1.19"
+  "integrity" "sha512-q42es4c8iIeTgcnB+yJgRTTzftv3eYYvCZOh1Ckn2eX/3o5TdsQYKUWpLoLuGlcY/p+VAhV9IOEZJcWk/vfkXw=="
+  "resolved" "https://registry.npmjs.org/@types/react-redux/-/react-redux-7.1.20.tgz"
+  "version" "7.1.20"
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
@@ -8836,7 +8836,7 @@
     "inherits" "^2.0.1"
     "safe-buffer" "^5.1.2"
 
-"mdbreact@^5.0.1":
+"mdbreact@^5.1.0":
   "integrity" "sha512-l6h01ddV9eMacYHWyH8Np/rHz+/xZP21SeS7EnxZVE03RVXc993IbJFv2YgmNMWcK5NxE6uLgB+EqTQhLiOICw=="
   "resolved" "https://registry.yarnpkg.com/mdbreact/-/mdbreact-5.1.0.tgz"
   "version" "5.1.0"
@@ -11165,9 +11165,9 @@
     "typed-styles" "^0.0.7"
     "warning" "^4.0.2"
 
-"react-redux@^7.2.2":
+"react-redux@^7.2.5":
   "integrity" "sha512-Dt29bNyBsbQaysp6s/dN0gUodcq+dVKKER8Qv82UrpeygwYeX1raTtil7O/fftw/rFqzaf6gJhDZRkkZnn6bjg=="
-  "resolved" "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.5.tgz"
+  "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-7.2.5.tgz"
   "version" "7.2.5"
   dependencies:
     "@babel/runtime" "^7.12.1"

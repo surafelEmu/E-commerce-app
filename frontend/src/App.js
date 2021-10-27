@@ -5,7 +5,7 @@ import Home from './components/Home'
 import Detail from './components/Detail' ;
 import Login from './components/user/login' ;
 import Register from './components/user/register';
-
+import ListOrders from './components/orders/ListOrders';
 import {useEffect , useState} from 'react' ;
 
 import axios from 'axios' ;
@@ -20,8 +20,14 @@ import Shipping from './components/cart/Shipping' ;
 import ConfirmOrder from './components/cart/ConfirmOrder' ;
 import Payment from './components/cart/payment' ;
 import Cart from './components/cart/cart' ;
+// import OrderList from './components/orders/ListOrders' ;
+import OrderDetail from './components/orders/orderDetail';
+import { myOrders } from './actions/orderAction';
 
+import Success from './components/cart/orderSuccess' ;
 import './App.css'
+
+import { useSelector , useDispatch } from 'react-redux';
 
 // Payment 
 import { Elements } from '@stripe/react-stripe-js' ;
@@ -31,27 +37,19 @@ import { loadStripe } from '@stripe/stripe-js' ;
 function App() { 
   const [stripeApiKey , setStripeApiKey ] = useState('') ;
 
+
   useEffect(() => {
-    store.dispatch(loaduser()) ;
-
-    setStripeApiKey(process.env.REACT_APP_STRIPE_API_KEY) ;
-    // async function getStripekey() { 
-
-    //   try{
-    //     console.log('trinig to get api key') ;
-    //     const data = await axios.get('http://localhost:4000/api/v1/stripeapi') ;
-  
-    //     console.log('got it') ;
-    //     console.log(data) ;
-    //   }
-    //  catch(error) {
-    //    console.log(error) ;
-    //  }     
-    //   //setStripeApiKey(data.stripeApiKey) ;
-    // }
    
-    //getStripekey() ;
+try{
 
+  store.dispatch(loaduser()) ;
+  store.dispatch(myOrders()) ;
+    setStripeApiKey(process.env.REACT_APP_STRIPE_API_KEY) ;
+} catch(error) {
+  console.log(error) ;
+}
+    
+  
   }, []) ;
 
   console.log('This is stripeKey')
@@ -71,17 +69,20 @@ function App() {
           <Route path = "/register" component={Register}/>
           <ProtectedRout path = "/shipping" component={Shipping} exact/>
           <ProtectedRout path = "/confirm" component={ConfirmOrder} exact/>
+          <ProtectedRout path = "/success" component={Success} exact/>
+          <ProtectedRout path = "/orders/me" component={ListOrders} exact/>
+          <ProtectedRout path = "/order/:id" component={OrderDetail} exact/>
 
           <Route path = "/" component={Home} exact />
           <Route path = "/search/:keyword" component={Home}  />
 
           <Route path = "/product/:id" component={Detail} exact />
 
-          {stripeApiKey && 
+          {/* {stripeApiKey && 
             <Elements stripe={loadStripe(stripeApiKey)}>
               <ProtectedRout path="/payment" component={Payment} />
             </Elements>
-          }
+          } */}
      </div>
      <Footer /> 
     </div>

@@ -119,6 +119,7 @@ const Payment = ({ history }) => {
                     }
 
                     dispatch(newOrder(order)) ;
+                    history.push('/orderSuccess') ;
                 } else {
                     alert.error('There is some error occured wile processing payment') ;
                 }

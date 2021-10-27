@@ -27,62 +27,48 @@ export const newOrder = (order) => async (dispatch) =>  {
 
 } 
 
-// export const register = (userData) => async (dispatch) => {
-//     dispatch({type: userConstants.REGISTER_USER_REQUEST}) ;
+export const myOrders = () => async (dispatch) => {
+    dispatch({type: orderConstants.MY_ORDERS_REQUEST}) ;
 
-//     try{
-
-//         const config = {
-//             headers: {
-//                 'Content-Type': 'multipart/form-data'
-//             }
-//         }
-//         console.log('requsting register......')
-
-//         const {data} = await axios.post('/api/v1/register' , userData , config ) ;
-
-//         console.log('register done........')
-//         dispatch({type: userConstants.REGISTER_USER_SUCCESS , payload: data.user}) ;
-
-//     }catch(error) {
-//         dispatch({type: userConstants.REGISTER_USER_FAIL , payload: error}) ;
-//     }
-// }
-
-
-// export const loaduser = () => async (dispatch) => {
-//     dispatch({type: userConstants.LOAD_USER_REQUEST}) ;
-
-//     try{
-
-//         const {data} = await axios.get('/api/v1/me') ;
-
-//         console.log(data) ;
-
-//         dispatch({type: userConstants.LOAD_USER_SUCCESS , payload: data.user}) ;
-
-//     }catch(error) {
-//         console.log(error)
-//         dispatch({type: userConstants.LOAD_USER_FAIL , payload: error}) ;
-//     }
-// }
-
-// export const logout = () => async (dispatch) => {
-
-//     try{
-
-//         await axios.get('/api/v1/logout') ;
-
-//         dispatch({ type: userConstants.LOGOUT_SUCCESS }) ;
-
-//     }catch(error) {
-//         console.log(error)
-//         dispatch({type: userConstants.LOGOUT_FAIL , payload: error}) ;
-//     }
-// }
+    try{
+        const {data} = await axios.get('/api/v1/orders/me')
+        console.log('This is from the actions')
+        console.log(data.orders) ;
+        dispatch({
+            type: orderConstants.MY_ORDERS_SUCCESS ,
+            payload: data
+        })
+    } catch(error) {
+        console.log('some error happened')
+        console.log(error) ;
+        dispatch({
+            type: orderConstants.MY_ORDERS_FAIL ,
+            payload: error
+        })
+    }
+}
 
 
+export const getOrderDetail = (id) => async (dispatch) => {
+    dispatch({type: orderConstants.ORDER_DETAILS_REQUEST}) ;
 
+    try{
+        const {data} = await axios.get(`/api/v1/order/${id}`)
+        console.log('This is from the actions')
+        console.log(data.order) ;
+        dispatch({
+            type: orderConstants.ORDER_DETAILS_SUCCESS ,
+            payload: data.order
+        })
+    } catch(error) {
+        console.log('some error happened')
+        console.log(error) ;
+        // dispatch({
+        //     type: orderConstants.ORDER_DETAILS_FAIL ,
+        //     payload: error
+        // })
+    }
+}
 
 
 

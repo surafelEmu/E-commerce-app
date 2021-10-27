@@ -1,6 +1,6 @@
-import orderConstants from '../constants/orderConstants' ;
+import orderConstants, { CLEAR_ERRORS } from '../constants/orderConstants' ;
 
-export const newOrderReducer = (state = {order: {}} , action) => {
+export const newOrderReducer = (state = {} , action) => {
     switch(action.type) {
         case orderConstants.CREATE_ORDER_REQUEST : 
             return {
@@ -20,6 +20,11 @@ export const newOrderReducer = (state = {order: {}} , action) => {
                 loading: false ,
                 error: action.payload
             } 
+        case CLEAR_ERRORS:
+                return {
+                    ...state,
+                    error: null
+                }
 
         default: return {
             state
@@ -27,44 +32,56 @@ export const newOrderReducer = (state = {order: {}} , action) => {
     }
 }
 
-// export const allOrderReducer = (state = {user: {}} , action) => {
-//     switch(action.type) {
-//         case userConstants.UPDATE_USER_REQUEST : 
-//         case userConstants.UPDATE_PASSWORD_REQUEST:
-//             return {
-//                 ...state ,
-//                 loading: true ,
-//                 isUpdated: false ,
 
-//             }
-//         case userConstants.UPDATE_USER_SUCCESS : 
-//         case userConstants.UPDATE_PASSWORD_SUCCESS: 
-//             return {
-//                 ...state ,
-//                 loading: false ,
-//                 isUpdated: true ,
-//                 updatedUser: action.payload 
+export const myOrderReducer = (state = {orders: []} , action) => {
+    switch(action.type) {
+        case orderConstants.MY_ORDERS_REQUEST: 
+            return {
+                loading: true 
+            }
+        case orderConstants.MY_ORDERS_SUCCESS: 
+            return {
+                loading: false ,
+                orders: action.payload
+            }
+        case orderConstants.MY_ORDERS_FAIL: 
+            return {
+                loading: false ,
+                error: action.payload
+            }
+        case orderConstants.CLEAR_ERRORS: 
+            return {
+                ...state ,
+                error: null 
+            }
+        default: 
+            return state ;
+    }
+}
 
-//             }
-//         case userConstants.UPDATE_USER_FAIL : 
-//         case userConstants.UPDATE_PASSWORD_FAIL: 
-//             return {
-//                 ...state ,
-//                 loading: false ,
-//                 isUpdated: false ,
-//                 err: action.payload
-//             }
-//         case userConstants.UPDATE_USER_RESET : 
-//         case userConstants.UPDATE_PASSWORD_RESET: 
-//             return {
-//                 ...state ,
-//                 loading: false ,
-//                 isUpdated: false ,
-//                 updatedUser: null 
-//             }
-//         default: 
-//             return  state ;
-            
 
-//     }
-// }
+export const orderDetailReducer = (state = {order: {}} , action) => {
+    switch(action.type) {
+        case orderConstants.ORDER_DETAILS_REQUEST: 
+            return {
+                loading: true 
+            }
+        case orderConstants.ORDER_DETAILS_SUCCESS: 
+            return {
+                loading: false ,
+                order: action.payload
+            }
+        case orderConstants.ORDER_DETAILS_FAIL: 
+            return {
+                loading: false ,
+                error: action.payload
+            }
+        case orderConstants.CLEAR_ERRORS: 
+            return {
+                ...state ,
+                error: null 
+            }
+        default: 
+            return state ;
+    }
+}

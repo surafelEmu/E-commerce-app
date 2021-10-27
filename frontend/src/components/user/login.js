@@ -6,7 +6,7 @@ import {MetaData} from '../layout/MetaData'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { login} from '../../actions/authAction' ;
+import { login , cleanErrors} from '../../actions/authAction' ;
 
 const Login = ({ history, location }) => {
 
@@ -27,7 +27,7 @@ const Login = ({ history, location }) => {
         if(error) {
             console.log('error.........' + error)
             alert.error(error) ;
-          // dispatch(clearErrors()) ;
+          dispatch(cleanErrors()) ;
         } 
 
        

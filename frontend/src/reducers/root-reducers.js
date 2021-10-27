@@ -6,13 +6,14 @@ import storage from 'redux-persist/lib/storage' ;
 
 import {authReducer , userReducer} from './userReducer' ;
 import { cartReducer } from "./cartReducer";
-import { productDetailsReducer , productsReducer } from "./productReducers";
-import { newOrderReducer} from './orderReducer'
+import { newReviewReducer , productDetailsReducer , productsReducer } from "./productReducers";
+import { newOrderReducer , myOrderReducer , orderDetailReducer} from './orderReducer'
+
 
 const persistConfig = {
     key: 'root' ,
     storage ,
-    whitelist: ['cart']
+    whitelist: ['cart' , 'user' , 'orderDetail']
 }
 
 const rootReducer = combineReducers({
@@ -21,7 +22,10 @@ const rootReducer = combineReducers({
     products: productsReducer ,
     cart: cartReducer ,
     productDetails: productDetailsReducer ,
-    order: newOrderReducer
+    order: newOrderReducer ,
+    myOrders: myOrderReducer ,
+    orderDetail: orderDetailReducer ,
+    productReview: newReviewReducer
 }) ;
 
 export default persistReducer(persistConfig ,rootReducer) ;

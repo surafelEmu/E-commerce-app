@@ -4,7 +4,7 @@ class ErrorHandler extends Error {
         super(message) ;
         this.statusCode = statusCode ;
         
-        console.log(this) ;
+        //console.log(this) ;
         Error.captureStackTrace(this , this.constructor) ;
     }
 }

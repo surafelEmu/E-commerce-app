@@ -13,7 +13,7 @@ exports.handleErrors = (err , req ,res , next) => {
     message = err.message || "Internal Server Error" ;
 
     console.log('reading from error')
-    console.log( err) ;
+    //console.log( err) ;
 
     if(process.env.NODE_ENV == 'DEVELOPEMENT') {
         res.status(statusCode).json({

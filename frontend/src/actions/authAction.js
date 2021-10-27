@@ -21,7 +21,7 @@ export const login = (email, password) => async (dispatch) =>  {
         dispatch({type: userConstants.LOGIN_SUCCESS , payload: data.user })
     } catch(error) {
         console.log('error..' + error) ;
-        dispatch({type: userConstants.LOGIN_FAIL , payload: error.response.data.errMessage}) ;
+        dispatch({type: userConstants.LOGIN_FAIL , payload: error.message}) ;
     }
    
 
@@ -63,7 +63,7 @@ export const loaduser = () => async (dispatch) => {
 
     }catch(error) {
         console.log(error)
-        dispatch({type: userConstants.LOAD_USER_FAIL , payload: error}) ;
+        dispatch({type: userConstants.LOAD_USER_FAIL , payload: error.message}) ;
     }
 }
 

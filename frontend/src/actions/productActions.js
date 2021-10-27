@@ -34,22 +34,49 @@ export const getProducts = (keyword = '' , currentPage = 1 , price , catagory , 
 
 export const getProductDetail = (id) => async (dispatch) => {
     try{
-        dispatch({ type: ProductConstants.PRODUCTS_DETAIL_REQUEST})
+        dispatch({ type: ProductConstants.PRODUCT_DETAILS_REQUEST})
 
         const { data } = await axios.get(`/api/v1/product/${id}`) ;
 
         dispatch({
-            type: ProductConstants.PRODUCTS_DETAIL_SUCCESS ,
+            type: ProductConstants.PRODUCT_DETAILS_SUCCESS ,
             payload: data
         })
 
     }catch(error) {
         dispatch({
-            type: ProductConstants.PRODUCTS_DETAIL_FAIL ,
+            type: ProductConstants.PRODUCT_DETAILS_FAIL ,
+            payload: error
+        })
+    }
+}
+
+
+export const newReview = (reviewData) => async (dispatch) => {
+    try{
+        dispatch({ type: ProductConstants.NEW_REVIEW_REQUEST})
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.put('/api/v1/review/new' , reviewData , config) ;
+        console.log(data) ;
+
+        dispatch({
+            type: ProductConstants.NEW_REVIEW_SUCCESS 
+        })
+
+    }catch(error) {
+        dispatch({
+            type: ProductConstants.NEW_REVIEW_FAIL ,
             payload: error.response.data.errMessage
         })
     }
 }
+
 
 
 //clear Errors 
